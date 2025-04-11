@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::get('/dashboard-owner', function () {
 Route::get('/dashboard-karyawan', function () {
     return view('dashboard.karyawan');
 })->middleware(['auth', 'role:karyawan'])->name('dashboard.karyawan');
+
+Route::get('/absensi', [AbsensiController::class, 'index'])->middleware('role:owner');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
